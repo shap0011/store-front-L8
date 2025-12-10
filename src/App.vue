@@ -1,5 +1,5 @@
 <template>
-  <TopNav :cartItemCount="cartItemCount"/>
+  <TopNav :cartItemCount="cartItemCount" />
   <router-view
     :products="products"
     :cartItems="cartItems"
@@ -10,58 +10,60 @@
 </template>
 
 <script>
-import TopNav from './components/TopNav.vue'
+import TopNav from "./components/TopNav.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    TopNav
+    TopNav,
   },
   data() {
     return {
       cartItems: [],
       products: [],
-    }
+    };
   },
   computed: {
     cartItemCount() {
       return this.cartItems.reduce((total, item) => {
-        return total + item.quantity
-      }, 0)
-    }
+        return total + item.quantity;
+      }, 0);
+    },
   },
   mounted() {
-    this.getProducts()
+    this.getProducts();
   },
   methods: {
     getProducts() {
-      fetch('/products')
-        .then(response => response.json())
-        .then(products => {
-          console.log('success getting proxy products')
-          this.products = products
+      fetch("/products")
+        .then((response) => response.json())
+        .then((products) => {
+          console.log("success getting proxy products");
+          this.products = products;
         })
-        .catch(error => {
-          console.log(error)
-          alert('Error occurred while fetching products')
-        })
+        .catch((error) => {
+          console.log(error);
+          alert("Error occurred while fetching products");
+        });
     },
     addToCart({ productId, quantity }) {
       // check if the product is already in the cart
       const existingCartItem = this.cartItems.find(
-        item => item.product.id == productId
-      )
+        (item) => item.product.id == productId
+      );
       if (existingCartItem) {
         // if it is, increment the quantity
-        existingCartItem.quantity += quantity
+        existingCartItem.quantity += quantity;
       } else {
         // if not, find the product, and add it with quantity to the cart
-        const product = this.products.find(product => product.id == productId)
-        this.cartItems.push({ product, quantity })
+        const product = this.products.find(
+          (product) => product.id == productId
+        );
+        this.cartItems.push({ product, quantity });
       }
     },
     removeFromCart(index) {
-      this.cartItems.splice(index, 1)
+      this.cartItems.splice(index, 1);
     },
     submitOrder() {
       // get the order-service URL from an environment variable
@@ -70,46 +72,46 @@ export default {
       // create an order object
       const order = {
         customerId: Math.floor(Math.random() * 10000000000).toString(),
-        items: this.cartItems.map(item => {
+        items: this.cartItems.map((item) => {
           return {
             productId: item.product.id,
             quantity: item.quantity,
-            price: item.product.price
-          }
-        })
-      }
+            price: item.product.price,
+          };
+        }),
+      };
 
       console.log(JSON.stringify(order));
 
       // call the order-service using fetch
       fetch(`/order`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(order)
+        body: JSON.stringify(order),
       })
-        .then(response => {
-          console.log(response)
+        .then((response) => {
+          console.log(response);
           if (!response.ok) {
-            alert('Error occurred while submitting order')
+            alert("Error occurred while submitting order");
           } else {
-            this.cartItems = []
-            alert('Order submitted successfully')
+            this.cartItems = [];
+            alert("Order submitted successfully");
           }
         })
-        .catch(error => {
-          console.log(error)
-          alert('Error occurred while submitting order')
-        })
-    }
+        .catch((error) => {
+          console.log(error);
+          alert("Error occurred while submitting order");
+        });
+    },
   },
-}
+};
 </script>
 
 <style>
 body {
-  background-image: url('@/assets/algonquin.jpg');
+  background-image: url("@/assets/BastBuy_theme.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Keeps the background in place when scrolling */
