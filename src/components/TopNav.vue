@@ -2,7 +2,11 @@
   <nav>
     <div class="logo">
       <a href="/">
-        <img src="/public/bestbuy_logo.png" alt="BestBuy Store Logo" />
+        <img
+          src="/public/bestbuy_logo.png"
+          alt="BestBuy Store Logo"
+          class="bblogo"
+        />
       </a>
     </div>
     <button class="hamburger" @click="toggleNav">
@@ -107,7 +111,7 @@ nav img {
   bottom: -6px;
 }
 
-.logo {
+.bblogo {
   height: 40px;
   width: auto;
   margin-right: 10px;
