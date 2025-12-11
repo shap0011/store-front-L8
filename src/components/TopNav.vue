@@ -3,7 +3,7 @@
     <div class="logo">
       <a href="/">
         <img
-          src="/public/bestbuy_logo.png"
+          src="/src/assets/bestbuy_logo.png"
           alt="BestBuy Store Logo"
           class="bblogo"
         />
