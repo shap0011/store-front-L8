@@ -107,6 +107,12 @@ nav img {
   bottom: -6px;
 }
 
+.logo {
+  height: 50px;
+  width: auto;
+  margin-right: 10px;
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
