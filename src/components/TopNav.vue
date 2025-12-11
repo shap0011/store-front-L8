@@ -2,7 +2,7 @@
   <nav>
     <div class="logo">
       <a href="/">
-        <img src="/algonquin-pet-store.png" alt="Algonquin Pet Store Logo">
+        <img src="/public/bestbuy_logo.png" alt="BestBuy Store Logo" />
       </a>
     </div>
     <button class="hamburger" @click="toggleNav">
@@ -10,29 +10,33 @@
     </button>
     <ul class="nav-links" :class="{ 'nav-links--open': isNavOpen }">
       <li><router-link to="/" @click="closeNav">Products</router-link></li>
-      <li><router-link to="/cart" @click="closeNav">Cart ({{ cartItemCount }})</router-link></li>
+      <li>
+        <router-link to="/cart" @click="closeNav"
+          >Cart ({{ cartItemCount }})</router-link
+        >
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'TopNav',
-  props: ['cartItemCount'],
+  name: "TopNav",
+  props: ["cartItemCount"],
   data() {
     return {
-      isNavOpen: false
-    }
+      isNavOpen: false,
+    };
   },
   methods: {
     toggleNav() {
-      this.isNavOpen = !this.isNavOpen
+      this.isNavOpen = !this.isNavOpen;
     },
     closeNav() {
-      this.isNavOpen = false
-    }
-  }
-}
+      this.isNavOpen = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -86,7 +90,7 @@ nav img {
 
 .hamburger-icon::before,
 .hamburger-icon::after {
-  content: '';
+  content: "";
   display: block;
   width: 20px;
   height: 2px;
