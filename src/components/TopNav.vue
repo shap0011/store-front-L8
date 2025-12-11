@@ -108,7 +108,7 @@ nav img {
 }
 
 .logo {
-  height: 50px;
+  height: 40px;
   width: auto;
   margin-right: 10px;
 }
